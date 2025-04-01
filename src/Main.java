@@ -116,5 +116,51 @@ menor a mayor*/
                 .reduce(listaNumeros.get(0),  (acum, numero) -> acum = acum * numero );
 
         System.out.println("Producto de: " + listaNumeros + ":" + producto);
+
+
+
+        /*12. Usa reduce para encontrar el nombre con más caracteres
+        en una lista de nombres.*/
+
+        String nombreMasLargo = listaNombres.stream()
+                 .reduce((nombre1,nombre2)->
+                         nombre1.length() > nombre2.length() ? nombre1 : nombre2)
+                         .orElse("");
+
+        System.out.println("Nombre mas largo: " + nombreMasLargo);
+
+        /*13.Convertir una lista de enteros en una cadena separada
+             por guiones
+             Usa map y Collectors.joining para convertir una lista
+             de enteros en una cadena con valores separados por -.*/
+
+        String cadena = listaNumeros.stream()
+                .map(num -> num.toString())/// CASTEAMOS LOS NUMEROS A UN STRING
+                .collect(Collectors.joining("-")); ///LUEGO CON EL COLLECTORS.JOINING DEVUELVE UN COLLECTOR CON LA SEPARACION QUE HAY EN EL DELIMITER ENTRE CADA STRING
+
+        System.out.println("Cadena de numeros: " + cadena);
+
+        /*14.Agrupar una lista de números en pares e impares
+             Usar Collectors.partitioningBy para separar los
+             números de una lista en pares e impares.*/
+
+        Map<Boolean,List<Integer>> listaParticionada =  listaNumeros.stream() /// GUARDO TODO ESTO EN UN MAP DONDE LA CLAVE ES UN BOOLEAN DONDE FALSE ES IMPAR Y TRUE ES PAR
+                .collect(Collectors.partitioningBy(n -> n%2==0)); ///ACA PARTICIONA LA LISTA, DENTRO DEBEMOS PONER LA CONDICION QUE QUEREMOS QUE SEA VERDADERA (EN MI CASO PUSE QUE LA CONDICION VERDADERA SEA TRUE, OSEA, PAR)
+
+        System.out.println(listaParticionada);
+
+
+                /*15. Obtener la suma de los cuadrados de los números
+                      impares
+                      Usa filter, map y reduce para obtener la suma de los
+                      cuadrados de los números impares de una lista.*/
+
+         int cuadradosImpares = listaNumeros.stream()
+                .filter(num ->num %2 == 1)
+                .map(num -> num*num)
+                .reduce(0,Integer::sum);
+
+        System.out.println("la suma de los cuadrados impares es: "+cuadradosImpares);
+        }
     }
-}
+
