@@ -115,6 +115,6 @@ menor a mayor*/
         int producto = listaNumeros.stream()
                 .reduce(listaNumeros.get(0),  (acum, numero) -> acum = acum * numero );
 
-        System.out.println("Producto de: " + listaNumeros + ":" + producto);
+        System.out.println("Productos de los numeros de: " + listaNumeros + ":" + producto);
     }
 }
